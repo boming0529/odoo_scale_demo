@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  odoo14:
+    image: odoo:14
+    volumes:
+      - ./odoo/:/etc/odoo/
+      - ./data/:/var/lib/odoo/.local/share/Odoo
+    # ports: 
+    #   - 9000:8069
+
+  webserver:
+    image: nginx:latest
+    volumes:
+      - ./sites-enabled/:/etc/nginx/conf.d/
+    depends_on:
+      - odoo14
+    ports:
+      - 9000:9000
