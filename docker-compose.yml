@@ -17,3 +17,32 @@ services:
       - odoo14
     ports:
       - 9000:9000
+
+  # db:
+  #   image: postgres:14
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     - POSTGRES_DB=postgres
+  #     - POSTGRES_USER=myuser
+  #     - POSTGRES_PASSWORD=postgres
+  #   volumes:
+  #     - pg_data:/var/lib/postgresql/data
+
+  pgbouncer:
+    image: edoburu/pgbouncer
+    ports:
+      - "6432:6432"
+    volumes:
+      - ./pgbouncer/:/etc/pgbouncer/
+    # environment:
+    #   - DB_NAME=odoo14
+    #   - DB_USER=odoo14
+    #   - DB_PORT=5432
+    #   - DB_HOST=host.docker.internal
+    #   - LISTEN_ADDR=*
+    #   - LISTEN_PORT=6432
+    #   - POOL_MODE=transaction
+    #   - MAX_CLIENT_CONN=250
+    # depends_on:
+    #   - db
